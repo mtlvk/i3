@@ -93,7 +93,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 set $workspace1 "1.Terminal"
-set $workspace2 "2.Firefox" 
+set $workspace2 "2.Firefox"
 set $workspace10 "10.Music"
 
 # switch to workspace
