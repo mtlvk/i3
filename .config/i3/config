@@ -54,7 +54,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
+#  move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
@@ -96,12 +96,13 @@ set $workspace1 "1 Terminal  "
 set $workspace2 "2 Firefox  "
 set $workspace3 "3 Social "
 set $workspace10 "10 Music "
+set $workspace4 "4 Discord "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace 4
+bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -124,6 +125,8 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 #Music
 assign [class="Rhythmbox"] $workspace10
 
+#Discord
+assign [class="discord"] $workspace4
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -180,7 +183,7 @@ bar {
 	colors {
 		background $bg-color
 	    	separator #757575
-		#                  border             background         text
+		#           hel      border             background         text
 		focused_workspace  $bg-color          $bg-color          $text-color
 		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
 		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
@@ -188,9 +191,13 @@ bar {
 	position bottom
 }
 
+#Transparency enable
+
+exec_always compton -f
+
 # start rofi (a program launcher)
 
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 300 -opacity "85" -bw 0 -bc "#00ff00" -bg "#00ff00" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
+bindsym $mod+d exec rofi -show run -theme barac 
 
 #Lock Keybind
 
@@ -224,11 +231,8 @@ exec rhythmbox
 exec gnome-terminal
 exec firefox
 
+
 #Wallpaper
 
 exec_always feh --bg-scale /home/mateo/Pictures/Wallpapers/Wallpaper-vector.png
 
-#Transparency enable
-
-exec_always compton -f
-	
