@@ -54,7 +54,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-#  move focused window
+# move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
@@ -96,13 +96,12 @@ set $workspace1 "1 Terminal  "
 set $workspace2 "2 Firefox  "
 set $workspace3 "3 Social "
 set $workspace10 "10 Music "
-set $workspace4 "4 Discord "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
+bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -125,8 +124,8 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 #Music
 assign [class="Rhythmbox"] $workspace10
 
-#Discord
-assign [class="discord"] $workspace4
+#Open Firefox
+bindsym %mod+Shift+f firefox
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -167,45 +166,61 @@ set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
+#mycolorset
+set $black #1d1f21
+set $grey  #282a2e
+set $red   #a54242
+set $green #8c9440
+set $orange #de935f
+set $teal  #5e8d87
+
+## POLYBAR ##
+exec_always polybar example
+
+
+
 # window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #ffffff
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #ffffff
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #ffffff
-client.urgent $urgent-bg-color $urgent-bg-color $text-color #00ff00
+client.focused          $green             $green          $text-color          #ffffff
+client.unfocused        $teal 	$teal       $inactive-text-color #ffffff
+client.focused_inactive $teal  	$teal  $inactive-text-color #ffffff
+client.urgent 		$orange  $orange $text-color #00ff00
 
-hide_edge_borders both
+
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-	colors {
-		background $bg-color
-	    	separator #757575
-		#           hel      border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-}
-	position bottom
-}
-
-#Transparency enable
-
-exec_always compton -f
+#
+#
+#bar {
+ #       status_command i3status
+#	colors {
+#		background $bg-color
+#	    	separator #757575
+#		#                  border             background         text
+#		focused_workspace  $bg-color          $bg-color          $text-color
+#		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+#		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color#  #
+#		
+#}
+#	position bottom
+#}
 
 # start rofi (a program launcher)
 
-bindsym $mod+d exec rofi -show run -theme barac 
+bindsym $mod+d exec rofi -show run -theme config2
 
 #Lock Keybind
 
-bindsym $mod+Shift+x exec i3lock
+bindsym $mod+Shift+x exec i3lock-fancy
+
+#Autolock
+
+exec_always xautolock -time 5  -locker i3lock-fancy 
 
 #No Borders
 
-for_window [class="^.*"] border pixel 0 
+for_window [class="^.*"] border pixel 1
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -228,11 +243,25 @@ bindsym XF86AudioPrev exec playerctl previous
 #Startup App
 
 exec rhythmbox
-exec gnome-terminal
+exec terminator
 exec firefox
-
 
 #Wallpaper
 
-exec_always feh --bg-scale /home/mateo/Pictures/Wallpapers/Wallpaper-vector.png
+#exec --no-startup-id xsetroot -solid "#333333"
+exec_always feh --bg-scale /home/mateo/Pictures/Wallpapers/stupid.png
+#exec_always xsetroot -solid #1d1f21
+
+
+
+#Transparency enable
+
+exec_always compton -f  
+
+##GAPS
+	
+
+gaps inner 30
+gaps outer 15
+
 
